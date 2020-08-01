@@ -1,11 +1,30 @@
-import React from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable linebreak-style */
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-function FormField({ label, type, name, value, onChange }) {
+const Input = styled.input`
+
+`;
+
+function FormField({
+  label, type, name, value, onChange,
+}) {
+  const fieldId = `id_${name}`;
+  const isTypeTextarea = type === 'textarea';
+  const tag = isTypeTextarea ? 'textarea' : 'input';
+
   return (
     <div>
-      <label>
-        {label}: 
-        <input
+      <label
+        htmlFor={fieldId}
+      >
+        {label}
+        :
+        <Input
+          as={tag}
+          id={fieldId}
           type={type}
           value={value}
           name={name}
@@ -13,7 +32,21 @@ function FormField({ label, type, name, value, onChange }) {
         />
       </label>
     </div>
-  )
+  );
 }
+
+FormField.defaultProps = {
+  type: 'text',
+  value: '',
+  onChange: () => {},
+};
+
+FormField.protoTypes = {
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+};
 
 export default FormField;
