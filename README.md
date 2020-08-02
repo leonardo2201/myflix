@@ -13,5 +13,5 @@ Após baixar o projeto, acesse ele via seu terminal rode os comandos:
 
 ```sh
 npm install
-npm start
+npm run dev
 ```
